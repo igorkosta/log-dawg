@@ -1,0 +1,38 @@
+{
+  "name": "log-dawg",
+  "version": "0.0.1",
+  "description": "Send logs from your frontend to Cloud Watch",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint './**/*.js'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cloudwatch",
+    "frontend",
+    "javascript",
+    "logs"
+  ],
+  "author": {
+    "name": "Igor",
+    "email": "igor.kostyuchenok@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/igorkosta/log-dawg",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:igorkosta/log-dawg.git"
+  },
+  "bugs": {
+    "url": "https://github.com/igorkosta/log-dawg/issues"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.790.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.13.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-security": "^1.4.0"
+  }
+}

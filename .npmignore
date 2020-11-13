@@ -1,0 +1,9 @@
+coverage
+*~
+
+.eslint*
+# no tmp files
+tmp
+# no tests in the package
+tests
+__tests__
