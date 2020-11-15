@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Created by Log-Dawg
+Parameters:
+  AppName:
+    Type: String
+    Default: MyFrontend
+  EnvName:
+    Type: String
+    Default: Production
+Resources:
+  AppLogGroup:
+    Properties:
+      LogGroupName:
+        Fn::Join:
+        - '-'
+        - - Ref: AppName
+          - Ref: EnvName
+      RetentionInDays: 7
+    Type: AWS::Logs::LogGroup
+  AppLogStream:
+    Properties:
+      LogGroupName: !Ref AppLogGroup
+      LogStreamName:
+        Fn::Join:
+        - '-'
+        - - Ref: AppName
+          - Ref: EnvName
+          - info
+    Type: AWS::Logs::LogStream
+    DependsOn: AppLogGroup
+  LogDawgPolicy:
+    Type: AWS::IAM::Policy
+    DependsOn: AppLogStream
+    Properties:
+      PolicyName: LogDawgdPolicy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action:
+          - logs:PutLogEvents
+          - Logs:DescribeLogStreams
+          Effect: Allow
+          Resource: !Ref AppLogStream

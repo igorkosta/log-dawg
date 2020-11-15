@@ -1,0 +1,10 @@
+[
+  {
+    "ParameterKey": "AppName",
+    "ParameterValue": "MyFrontend"
+  },
+  {
+    "ParameterKey": "EnvName",
+    "ParameterValue": "production"
+  }
+]
