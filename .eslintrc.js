@@ -1,5 +1,8 @@
 module.exports = {
-  plugins: ['node', 'security'],
+  plugins: [
+    'node',
+    'security'
+  ],
   extends: [
     'eslint:recommended',
     'plugin:node/recommended',

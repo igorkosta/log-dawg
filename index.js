@@ -1,17 +1,31 @@
 'use strict'
 
-const CloudWatchLogs = require('aws-sdk/clients/cloudwatchlogs')
-const { name: logGroupName } = require('./package')
+const CloudWatchLogs = require('aws-sdk/clients/cloudwatchlogs.js')
 
-class Logger {
+module.exports = class Logger {
   constructor(config) {
     /* values expected to be in the config object
-     * accessKeyId:
-     * secretAccessKey:
+     * accessKeyId
+     * secretAccessKey
+     * logGroupName
+     * logStreamName
      * region
      */
-    this.client = new CloudWatchLogs(config)
-    this.logGroupName = process.env.LOG_GROUP || logGroupName
+    const {
+      accessKeyId,
+      secretAccessKey,
+      logGroupName,
+      logStreamName,
+      region
+    } = config
+    this.client = new CloudWatchLogs({
+      accessKeyId,
+      secretAccessKey,
+      region
+    })
+    this.logGroupName = logGroupName
+    this.logStreamName = logStreamName
+    this.region = region
   }
   /*
    * Think about creating one log stream a day
@@ -22,7 +36,8 @@ class Logger {
     }
     try {
       const { logStreams } = await this.client.describeLogStreams(params).promise()
-      return logStreams[0].uploadSequenceToken
+      const logStream = logStreams.find(entry => entry.logStreamName === this.logStreamName)
+      return logStream.uploadSequenceToken
     } catch (error) {
       throw new Error(error)
     }
@@ -45,7 +60,7 @@ class Logger {
           }
         ],
         logGroupName: this.logGroupName,
-        logStreamName: 'test', //`${this.logGroup}-${timestamp}`
+        logStreamName: this.logStreamName,
         sequenceToken
       }
 
@@ -56,5 +71,3 @@ class Logger {
     }
   }
 }
-
-module.exports = Logger
