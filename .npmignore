@@ -1,13 +1,13 @@
 coverage
 *~
-
 .eslintrc.js
 lib
+# no pictures
+*.jpg
 # no tmp files
 tmp
 # no tests in the package
 tests
 __tests__
-
 # exclude aws scripts from the package
 aws
