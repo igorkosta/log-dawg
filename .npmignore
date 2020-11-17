@@ -2,6 +2,7 @@ coverage
 *~
 
 .eslintrc.js
+lib
 # no tmp files
 tmp
 # no tests in the package
